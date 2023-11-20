@@ -41,7 +41,7 @@ module.exports = {
     );
   },
 
-  deleteUser : ( callBack) => {
+  deleteCurrentUser : ( callBack) => {
     /*console.log("from delete : "+currentEmail.PUBLIC_currentLoggedInUserEmail);*/
 
     const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
@@ -73,7 +73,7 @@ module.exports = {
     );
   },
 
-  updateUser : (data, callBack) => {
+  updateCurrentUser : (data, callBack) => {
     const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
     pool.query(
       `select UserId from user where Email= ?`,

@@ -1,4 +1,4 @@
-const {create,getUsers,getUserByEmail,deleteUser, updateUser ,getUsersBySimilarLocation,
+const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser ,getUsersBySimilarLocation,
   getUsersBySimilarInterests , getUsersByUserName } = require("./user.service");
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
@@ -152,8 +152,8 @@ module.exports = {
       });
     },
 
-    deleteUser : (req, res) => {
-        deleteUser((err, results) =>{
+    deleteCurrentUser : (req, res) => {
+      deleteCurrentUser((err, results) =>{
         if (err) {
           console.log(err);
           return;
@@ -171,11 +171,11 @@ module.exports = {
       });
     },
 
-    updateUser : (req, res) => {
+    updateCurrentUser : (req, res) => {
       const body = req.body ;
       const salt = genSaltSync(10);
       body.Password =hashSync(body.Password,salt);  
-      updateUser( body , (err, results) =>{
+      updateCurrentUser( body , (err, results) =>{
         if (err) {
           console.log(err);
           return;
