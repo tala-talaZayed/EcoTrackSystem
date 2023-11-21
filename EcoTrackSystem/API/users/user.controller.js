@@ -1,7 +1,8 @@
-const {create,getUsers,getUserByEmail,deleteUser, updateUser ,getUsersBySimilarLocation,
+const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser ,getUsersBySimilarLocation,
   getUsersBySimilarInterests , getUsersByUserName } = require("./user.service");
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+
 
 module.exports = {
     createUser : (req,res)=>{
@@ -58,54 +59,10 @@ module.exports = {
         });
       });
     },
-
-    deleteUser : (req, res) => {
-      const UserId = req.params.UserId;
-      deleteUser( UserId , (err, results) =>{
-        if (err) {
-          console.log(err);
-          return;
-        }
-        if (results.affectedRows == 0) {
-          return res.json({
-            success: 1,
-            message: "not found"
-          });
-        }
-        return res.json({
-          success: 1,
-          message: "deleted!"
-        });
-      });
-    },
-
-
-
-    updateUser : (req, res) => {
-      //const UserId = req.params.UserId ; 
-      const body = req.body ;
-      const salt = genSaltSync(10);
-      body.Password =hashSync(body.Password,salt);  
-    updateUser( body , (err, results) =>{
-        if (err) {
-          console.log(err);
-          return;
-        }
-        if (results.affectedRows == 0) {
-          return res.json({
-            success: 0,
-            message: "not found"
-          });
-        }
-        return res.json({
-          success: 1,
-          message: "updated!"
-        });
-      });
-    },  
     
     login: (req, res) => {
       const body = req.body;
+      exports.PUBLIC_currentLoggedInUserEmail = body.Email ;
       getUserByEmail(body.Email, (err, results) => {
         if (err) {
           console.log(err);
@@ -116,16 +73,16 @@ module.exports = {
             data: "Invalid email or password !"
           });
         }           
-        const passwordMatch = compareSync(body.Password,results.Password);
-        if (!passwordMatch) {
+        const passwordNotMatch = compareSync(body.Password,results.Password);
+        if (!passwordNotMatch) {
           results.Password = undefined;
           const jsontoken = sign({ result : results },"qwe1234",{expiresIn: "10m"});
           return res.json(
-            {
+          {
             success: 1,
             message: "login done successfully !",
-            token: jsontoken
-          });
+            token: jsontoken 
+          });          
         }else {
           return res.json({
             success: 0,
@@ -191,6 +148,47 @@ module.exports = {
         return res.json({
           success: 1,
           data: results
+        });
+      });
+    },
+
+    deleteCurrentUser : (req, res) => {
+      deleteCurrentUser((err, results) =>{
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (results.affectedRows == 0) {
+          return res.json({
+            success: 1,
+            message: "not found"
+          });
+        }
+        return res.json({
+          success: 1,
+          message: "deleted!"
+        });
+      });
+    },
+
+    updateCurrentUser : (req, res) => {
+      const body = req.body ;
+      const salt = genSaltSync(10);
+      body.Password =hashSync(body.Password,salt);  
+      updateCurrentUser( body , (err, results) =>{
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (results.affectedRows == 0) {
+          return res.json({
+            success: 0,
+            message: "not found"
+          });
+        }
+        return res.json({
+          success: 1,
+          message: "updated!"
         });
       });
     }

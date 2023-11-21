@@ -3,7 +3,6 @@ module.exports = {
   checkToken: (req, res, next) => {
     let token = req.get("authorization");
     if (token) {
-      // Remove Bearer from string
       token = token.slice(7);
       jwt.verify(token, "qwe1234", (err, decoded) => {
         if (err) {

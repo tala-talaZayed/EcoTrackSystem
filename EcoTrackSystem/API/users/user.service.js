@@ -1,4 +1,6 @@
 const pool = require ("../../DB/database");//import
+const currentEmail = require('./user.controller');
+
 module.exports = {
   //create will recive data from controoler and will callback
   create :(data,callBlack)=> {    
@@ -26,19 +28,6 @@ module.exports = {
     );
   } ,
 
-  getUsers: callBack => {
-    pool.query(
-        `select UserId,UserName,Email,Password,mobile,MostIntersets,Location from user`,
-        [],
-        (error, results, fields) => {
-            if (error) {
-             return callBack(error);
-            }
-            return callBack(null, results);
-        }
-    );
-  },
-
   getUserByEmail : (Email, callBack) => {
     pool.query(
         `select UserId,UserName,Email,Password,mobile,MostIntersets,Location from user where Email=?`,
@@ -52,18 +41,23 @@ module.exports = {
     );
   },
 
-  deleteUser : (UserId, callBack) => {
+  deleteCurrentUser : ( callBack) => {
+    /*console.log("from delete : "+currentEmail.PUBLIC_currentLoggedInUserEmail);*/
+
+    const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
     pool.query(
-      `select UserId,UserName,Email,Password,mobile,MostIntersets,Location from user where UserId= ?`,
-      [UserId],
+      `select UserId from user where Email= ?`,
+      [Email],
       (error, results, fields) => {
         if (error) {
           return callBack(error);
-        }        
+        }
+        //test        
+        console.log (results[0].UserId);
         if (results){
           pool.query(
             `delete from user where UserId = ?`,
-            [UserId],
+            [results[0].UserId],
             (error, results, fields) => {
                 if (error) {
                  return callBack(error);
@@ -79,18 +73,26 @@ module.exports = {
     );
   },
 
-  updateUser : (data, callBack) => {
+  updateCurrentUser : (data, callBack) => {
+    const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
     pool.query(
-            `update user set UserName=?, Email=?, Password=?, mobile=? ,MostIntersets=?,Location=? where UserId = ?`
+      `select UserId from user where Email= ?`,
+      [Email],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        }
+        if (results){
+          pool.query(
+            `update user set UserName=?,Email=?, Password=?, mobile=? ,MostIntersets=?,Location=? where UserId = ?`
             ,[
               data.UserName, 
-              data.Email ,
+              data.Email , 
               data.Password ,
               data.mobile , 
               data.MostIntersets ,
               data.Location ,
-              data.UserId 
-
+              results[0].UserId 
             ],
             (error, results, fields) => {
                 if (error) {
@@ -99,6 +101,14 @@ module.exports = {
                 return callBack(null, results);
             } 
         );
+        }
+        else{
+          return callBack(null,null);
+        }
+    }
+    ); 
+
+
   } , 
   getUsersBySimilarInterests : (MostIntersets, callBack) => {
     pool.query(
