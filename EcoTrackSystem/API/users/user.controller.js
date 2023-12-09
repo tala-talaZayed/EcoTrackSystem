@@ -92,13 +92,12 @@ module.exports = {
       });
     },
     getUsersBySimilarInterests : (req, res) => {
-      const Interests = req.params.MostIntersets;
-      getUsersBySimilarInterests(Interests , (err, results) => {
+      getUsersBySimilarInterests((err, results) => {
         if (err) {
           console.log(err);
           return;
         }
-        if (!results) {
+        if (!results || results.length === 0 ) {
           return res.json({
             success: 0,
             message: "There are no users with similar interests !"

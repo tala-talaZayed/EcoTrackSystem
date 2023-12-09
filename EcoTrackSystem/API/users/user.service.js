@@ -6,8 +6,8 @@ module.exports = {
   create :(data,callBlack)=> {    
     pool.query( 
         //for query function pass three values 1.query 2.values from user 3.callback 
-        `insert into user(UserId,UserName,Email,Password,mobile,MostIntersets,Location)
-        values (?,?,?,?,?,?,?)` , 
+        `insert into user(UserId,UserName,Email,Password,mobile,Location)
+        values (?,?,?,?,?,?)` , 
         //the values from user
         [
             data.UserId ,
@@ -15,7 +15,7 @@ module.exports = {
             data.Email ,
             data.Password ,
             data.mobile ,
-            data.MostIntersets , 
+           // data.MostIntersets , 
             data.Location
         ],
 
@@ -110,11 +110,26 @@ module.exports = {
 
 
   } , 
-  getUsersBySimilarInterests : (MostIntersets, callBack) => {
+  getUsersBySimilarInterests : (callBack) => {
+    const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
     pool.query(
-        `select UserName,Email,mobile,MostIntersets,Location from user where 
-        MostIntersets like ?`,
-        [`%${ MostIntersets }%`] ,
+        `SELECT
+        user.username,user.email,user.location,user.mobile,GROUP_CONCAT(ecodata.dataId) AS dataIds,GROUP_CONCAT(ecodata.dataname) AS datanames,GROUP_CONCAT(ecodata.datagroup) AS groups
+        FROM
+            user_data
+        INNER JOIN
+            user ON user_data.userId = user.userId
+        INNER JOIN
+            ecodata ON user_data.dataId = ecodata.dataId
+        WHERE
+            user_data.dataId IN (
+                SELECT dataId
+                FROM user_data
+                WHERE userId = (SELECT userId FROM user WHERE email = ?)
+            ) AND user.Email != ?
+        GROUP BY
+            user.userId, user.username, user.email, user.location`,
+        [Email,Email] ,
         (error, results, fields) => {
             if (error) {
              return callBack(error);
