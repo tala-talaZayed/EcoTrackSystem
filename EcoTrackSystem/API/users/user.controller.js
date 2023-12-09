@@ -1,6 +1,5 @@
 const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser
-   ,getUsersBySimilarLocation,
-  /*getUsersBySimilarInterests*/ getUsersByUserName } = require("./user.service");
+   ,getUsersBySimilarLocation,getUsersBySimilarInterests, getUsersByUserName } = require("./user.service");
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const activeSessions = {};
@@ -112,8 +111,8 @@ module.exports = {
         });
       }
     },
-   /* getUsersBySimilarInterests : (req, res) => {
-      const Interests = req.params.MostIntersets;
+     getUsersBySimilarInterests : (req, res) => {
+      //const Interests = req.params.MostIntersets;
       getUsersBySimilarInterests(Interests , (err, results) => {
         if (err) {
           console.log(err);
@@ -131,7 +130,7 @@ module.exports = {
           data: results
         });
       });
-    },*/    
+    },    
     getUsersBySimilarLocation : (req, res) => {
       if(activeSessions[exports.PUBLIC_currentLoggedInUserEmail]){
       const Location = req.params.Location ;
