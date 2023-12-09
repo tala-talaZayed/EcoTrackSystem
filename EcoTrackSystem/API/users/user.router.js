@@ -10,7 +10,6 @@ router.get("/:UserName",checkToken,getUsersByUserName);
 router.delete("/",checkToken,deleteCurrentUser);
 router.patch("/",checkToken,updateCurrentUser );
 router.get("/Interests/",checkToken,getUsersBySimilarInterests);
-//router.get("/Interests/:MostIntersets",checkToken,getUsersBySimilarInterests);
 router.get("/Location/:Location",checkToken,getUsersBySimilarLocation);
 module.exports = router ;
 

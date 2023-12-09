@@ -112,8 +112,7 @@ module.exports = {
       }
     },
      getUsersBySimilarInterests : (req, res) => {
-      //const Interests = req.params.MostIntersets;
-      getUsersBySimilarInterests(Interests , (err, results) => {
+      getUsersBySimilarInterests((err, results) => {
         if (err) {
           console.log(err);
           return;
