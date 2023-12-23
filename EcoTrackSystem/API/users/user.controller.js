@@ -3,7 +3,7 @@ const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const activeSessions = {};
-
+let currentemail = '';
       
 let jsontoken ;
 module.exports = {
@@ -65,11 +65,15 @@ module.exports = {
     login: (req, res) => {
       const body = req.body;
       exports.PUBLIC_currentLoggedInUserEmail = body.Email ;
+      currentemail = body.Email;
+      //console.log(body.Email);
+      //console.log("in user controller login"+currentemail );
       getUserByEmail(body.Email, (err, results) => {
         if (err) {
           console.log(err);
         }
         if (!results) {
+          currentemail = '';
           return res.json({
             success: 0,
             data: "Invalid email or password !"
@@ -87,6 +91,7 @@ module.exports = {
             token: jsontoken 
           });          
         }else {
+          currentemail = '';
           return res.json({
             success: 0,
             data: "Invalid email or password !!"
@@ -97,6 +102,7 @@ module.exports = {
     logout : (req, res) => {
       if (activeSessions[exports.PUBLIC_currentLoggedInUserEmail]) {
         activeSessions[exports.PUBLIC_currentLoggedInUserEmail] = false;
+        currentemail = '';
         console.log("from logout1:" + exports.PUBLIC_currentLoggedInUserEmail);
         return res.json({
           success: 1,
@@ -241,7 +247,12 @@ module.exports = {
           message: "you are logged out !"
         }); 
       }
-    }
+    },
+     getCurrenUserEmail: () => {
+        //console.log("in user controller get "+currentemail );
+      return currentemail;
+  }
+  
 }
       
     
