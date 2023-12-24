@@ -157,6 +157,18 @@ module.exports = {
         }
     );
   }, 
+  getUserIsAdmin : (UserId,callBack) =>{
+    pool.query(
+      `select IsAdmin from user where UserId = ?`,
+      [UserId] ,
+      (error, results, fields) => {
+          if (error) {
+           return callBack(error);
+          }
+          return callBack(null, results);
+      }
+  );
+  }
 };
 
 

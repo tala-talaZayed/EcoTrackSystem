@@ -1,5 +1,5 @@
 const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser
-   ,getUsersBySimilarLocation,getUsersBySimilarInterests, getUsersByUserName } = require("./user.service");
+   ,getUsersBySimilarLocation,getUsersBySimilarInterests, getUsersByUserName, getUserIsAdmin } = require("./user.service");
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const activeSessions = {};
@@ -66,8 +66,6 @@ module.exports = {
       const body = req.body;
       exports.PUBLIC_currentLoggedInUserEmail = body.Email ;
       currentemail = body.Email;
-      //console.log(body.Email);
-      //console.log("in user controller login"+currentemail );
       getUserByEmail(body.Email, (err, results) => {
         if (err) {
           console.log(err);
@@ -78,11 +76,30 @@ module.exports = {
             success: 0,
             data: "Invalid email or password !"
           });
-        }           
+        }  
+        
+        //console.log();
+        let isAdmin; 
+        getUserIsAdmin(results.UserId, (err1, results1) => {
+          if (err1) {
+            console.log(err1);
+          }
+          if (results1) {
+            //currentemail = '';
+            isAdmin = results1.IsAdmin || false;
+            console.log("IS Admin inside: "+  isAdmin );
+            // to ensure synchronous operations so the other code will completed 
+            //after this method complete, then the isAdmin is defined
+            executeOtherCode(isAdmin);
+          }  
+        });
+        function executeOtherCode(isAdmin) {
         const passwordNotMatch = compareSync(body.Password,results.Password);
+       // console.log("IS Admin outside: "+  isAdmin );
         if (!passwordNotMatch) {
           results.Password = undefined;
-          jsontoken = sign({ result : results },"qwe1234",{expiresIn: "10m"});
+          const payload = { result: { ...results, isAdmin } };
+          jsontoken = sign(payload,"qwe1234",{expiresIn: "10m"});
           activeSessions[exports.PUBLIC_currentLoggedInUserEmail] = true;
           return res.json(
           {
@@ -96,7 +113,7 @@ module.exports = {
             success: 0,
             data: "Invalid email or password !!"
           });
-        }
+        }}
       });
     },
     logout : (req, res) => {
@@ -251,8 +268,33 @@ module.exports = {
      getCurrenUserEmail: () => {
         //console.log("in user controller get "+currentemail );
       return currentemail;
-  }
-  
+  },
+
+     getUserIsAdmin : (req, res) => {
+      getUserIsAdmin(userId,(err, results) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        return res.json({
+          success: 1,
+          data: results
+        });
+      });
+    },   /*
+    const userId= results.UserId;  
+    let isAdmin; 
+    getUserIsAdmin ((err2, results2)  => {
+      if (err2) {
+        console.log(err2);
+        return;
+      }
+      console.log(results2);
+      isAdmin = results2.IsAdmin || false;
+      console.log("isAdmin inside callback:", isAdmin);
+
+    });
+    console.log("isAdmin outside callback:", isAdmin);*/
 }
       
     

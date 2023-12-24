@@ -6,8 +6,8 @@ const userDataRouter = require("./API/userData/ud.router");
 const reportRouter = require("./API/report/report.router");
 app.use(express.json());
 app.use("/API/users",userRouter);
-app.use("/API/data",dataRouter);
-//app.use("/API/user_data",userDataRouter);
+app.use("/EcoSystem/data",dataRouter);
+
 app.use("/EcoSystem/User/Intrests",userDataRouter);
 app.use("/EcoSystem/report", reportRouter);
 

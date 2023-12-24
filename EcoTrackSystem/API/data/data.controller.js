@@ -1,11 +1,13 @@
 const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyDataId, getDatabySensorId,
   deleteDataById,deleteDataByName,deleteDataByGroupName, updateDataByitsName,updateDataByitsId} = require("./data.service");
   //const { sign } = require("jsonwebtoken");
-  
+
   
   module.exports = {
      addNewData: (req,res)=>{
           const body = req.body ;  
+          const isAdmin = req.decoded.result.isAdmin || false;
+          if(isAdmin ){
          // console.log(req.body);  
           addNewData(body , (err,results)=>{
             if(err){
@@ -22,6 +24,13 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
           );
           }
           );
+        }
+        else {
+          return res.json({
+            success: 0,
+            message: "Unauthorized. Only admins can access this resource."
+          });
+        }
       },
 
       getAllData: (req, res) => {
@@ -118,6 +127,8 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
       } ,
       deleteDataById : (req, res) => {
         const DataId= req.params.id;
+        const isAdmin = req.decoded.result.isAdmin || false;
+        if(isAdmin ){
         deleteDataById(DataId,(err, results) =>{
           if (err) {
             console.log(err);
@@ -134,9 +145,18 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
             message: "deleted!"
           });
         });
+      } 
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
       },
       deleteDataByName : (req, res) => {
         const DataName= req.params.name;
+        const isAdmin = req.decoded.result.isAdmin || false;
+        if(isAdmin ){
         deleteDataByName(DataName,(err, results) =>{
           if (err) {
             console.log(err);
@@ -153,9 +173,18 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
             message: "deleted!"
           });
         });
+      }
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
       },
       deleteDataByGroupName : (req, res) => {
         const DataGroup= req.params.group;
+        const isAdmin = req.decoded.result.isAdmin || false;
+        if(isAdmin ){
         deleteDataByGroupName(DataGroup,(err, results) =>{
           if (err) {
             console.log(err);
@@ -172,10 +201,19 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
             message: "deleted!"
           });
         });
+      }
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
       },
       updateDataByitsName: (req, res) => {
         const body = req.body ; 
         const DataName = req.params.name;
+        const isAdmin = req.decoded.result.isAdmin || false;
+        if(isAdmin ){
         updateDataByitsName( DataName, body , (err, results) =>{
           if (err) {
             console.log(err);
@@ -192,10 +230,19 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
             message: "updated!"
           });
         });
+      }
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
       },
       updateDataByitsId: (req, res) => {
         const body = req.body ; 
         const DataId = req.params.id;
+        const isAdmin = req.decoded.result.isAdmin || false;
+        if(isAdmin ){
         updateDataByitsId( DataId, body , (err, results) =>{
           if (err) {
             console.log(err);
@@ -213,11 +260,13 @@ const {addNewData, getAllData,getDataByGroupName,getDatabyDataName,getDatabyData
           });
         });
       }
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
+  }
   }
 
-  /*  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.2",
-    "mysql": "^2.18.1"
-  } */
+

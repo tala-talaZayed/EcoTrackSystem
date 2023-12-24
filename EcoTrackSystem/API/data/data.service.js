@@ -176,11 +176,9 @@ module.exports = {
   );
   } , 
 };
-/* UPDATE `ecodata` SET `DataGroup` = 'Air Qualit' WHERE `ecodata`.`DataId` = 1000 */
 
-/*`select DataId,DataGroup,DataName from ecodata where 
-        DataGroup like ?`,
-        [`%${DataGroup}%`] ,*/
+
+
 
 
 

@@ -5,6 +5,7 @@ let email = userController.getCurrenUserEmail();
  module.exports = {
     createReport : (req,res)=>{
        email=userController.getCurrenUserEmail();    
+       console.log( email);
         if(email && email!==''){
          const body = req.body ;  
          console.log("body: "+body.Title );
@@ -90,6 +91,8 @@ let email = userController.getCurrenUserEmail();
       },
 
      getAllReports: (req, res) => {
+      const isAdmin = req.decoded.result.isAdmin || false;
+      if(isAdmin){
         getAllReports((err, results) => {
          if (err) {
            console.log(err);
@@ -100,6 +103,13 @@ let email = userController.getCurrenUserEmail();
            data: results
          });
        });
+      }
+      else {
+        return res.json({
+          success: 0,
+          message: "Unauthorized. Only admins can access this resource."
+        });
+      }
      },  
  
      
