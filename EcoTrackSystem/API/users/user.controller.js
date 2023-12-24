@@ -86,8 +86,7 @@ module.exports = {
           }
           if (results1) {
             //currentemail = '';
-            isAdmin = results1.IsAdmin || false;
-            console.log("IS Admin inside: "+  isAdmin );
+            isAdmin =results1[0].IsAdmin || false;
             // to ensure synchronous operations so the other code will completed 
             //after this method complete, then the isAdmin is defined
             executeOtherCode(isAdmin);
@@ -95,7 +94,7 @@ module.exports = {
         });
         function executeOtherCode(isAdmin) {
         const passwordNotMatch = compareSync(body.Password,results.Password);
-       // console.log("IS Admin outside: "+  isAdmin );
+        console.log("IS Admin outside: "+  isAdmin );
         if (!passwordNotMatch) {
           results.Password = undefined;
           const payload = { result: { ...results, isAdmin } };
