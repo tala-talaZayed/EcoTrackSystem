@@ -5,12 +5,14 @@ const dataRouter = require("./API/data/data.router");
 const userDataRouter = require("./API/userData/ud.router");
 const reportRouter = require("./API/report/report.router");
 const sensorRouter = require("./API/sensor/sensor.router");
+const sampleRouter = require("./API/sample/sample.router");
 
 app.use(express.json());
 
 app.use("/API/users",userRouter);
 app.use("/EcoSystem/data",dataRouter);
 
+app.use("/API/sensors",sampleRouter);
 app.use("/EcoSystem/User/Intrests",userDataRouter);
 app.use("/EcoSystem/report", reportRouter);
 app.use("/EcoSystem/sensor", sensorRouter);
