@@ -26,7 +26,7 @@ let email = userController.getCurrenUserEmail();
          );
         }else{
           return res.json({
-            success: 1,
+            success: 0,
             message: "You are logged out !"
           });
      
@@ -54,7 +54,7 @@ let email = userController.getCurrenUserEmail();
         });
         }else{
           return res.json({
-            success: 1,
+            success: 0,
             message: "You are logged out !"
           });
      
@@ -82,7 +82,7 @@ let email = userController.getCurrenUserEmail();
             });
             }else{
               return res.json({
-                success: 1,
+                success: 0,
                 message: "You are logged out !"
               }); 
             }
@@ -110,7 +110,7 @@ let email = userController.getCurrenUserEmail();
             });
             }else{
               return res.json({
-                success: 1,
+                success: 0,
                 message: "You are logged out !"
               }); 
             }
@@ -138,7 +138,7 @@ let email = userController.getCurrenUserEmail();
        });
        }else{
          return res.json({
-           success: 1,
+           success: 0,
            message: "you are logged out !"
          }); 
        }

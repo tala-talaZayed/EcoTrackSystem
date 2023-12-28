@@ -55,7 +55,7 @@ let email = userController.getCurrenUserEmail();
         });
         }else{
           return res.json({
-            success: 1,
+            success: 0,
             message: "You are logged out !"
           });
      
@@ -84,7 +84,7 @@ let email = userController.getCurrenUserEmail();
         });
         }else{
           return res.json({
-            success: 1,
+            success: 0,
             message: "you are logged out !"
           }); 
         }
@@ -98,6 +98,12 @@ let email = userController.getCurrenUserEmail();
            console.log(err);
            return;
          }
+         if (!results ||results.length === 0 ) {
+          return res.json({
+            success: 0,
+            message: "There is Reports submitted to review!"
+          });
+        }
          return res.json({
            success: 1,
            data: results

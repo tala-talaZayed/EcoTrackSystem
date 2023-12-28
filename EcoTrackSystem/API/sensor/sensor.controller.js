@@ -10,6 +10,12 @@ module.exports = {
           error: 'Error while getting the sensors'
         });
       }
+      if (!results ||results.length === 0 ) {
+        return res.json({
+          success: 0,
+          message: "There is no sensors in the system !"
+        });
+      }
       return res.json({
         success: 1,
         data: results

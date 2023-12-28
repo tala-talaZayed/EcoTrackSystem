@@ -6,7 +6,7 @@ const {checkToken}= require("../../Authoriaztion/tokenValidation");
 router.post("/",checkToken,addNewData);
 router.get("/",checkToken,getAllData);
 router.get("/Group/:DataGroup",checkToken,getDataByGroupName);
-router.get("/Name/name/:DataName",checkToken,getDatabyDataName);
+router.get("/Name/:DataName",checkToken,getDatabyDataName);
 router.get("/:DataId",checkToken,getDatabyDataId);
 router.get("/Sensor/:SensorId",checkToken,getDatabySensorId);
 router.delete("/:id",checkToken,deleteDataById);
