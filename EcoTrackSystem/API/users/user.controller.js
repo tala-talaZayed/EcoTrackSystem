@@ -1,12 +1,8 @@
 const {create,getUsers,getUserByEmail,updateCurrentUser, deleteCurrentUser
-   ,getUsersBySimilarLocation,
-  /*getUsersBySimilarInterests*/ getUsersByUserName } = require("./user.service");
+   ,getUsersBySimilarLocation, getUsersByUserName,addSample } = require("./user.service");
 const {genSaltSync , hashSync , compareSync } = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 const activeSessions = {};
-
-      
-let jsontoken ;
 module.exports = {
     createUser : (req,res)=>{
         const body = req.body ;
@@ -14,11 +10,17 @@ module.exports = {
         body.Password = hashSync(body.Password,salt);        
         create(body , (err,results)=>{
           if(err){
-             console.log(err);
-             return res.status(500).json({
-               success :0 ,
-               message : "database connection error !"
-             });
+            if (err.code === 'ER_DUP_ENTRY') {
+              return res.status(409).json({
+                  success: 0,
+                  message: "Duplicate email or user id!"
+              });
+            } else {
+              return res.status(500).json({
+                  success: 0,
+                  message: "Database connection error!"
+              });
+            }
           }
             return res.status(200).json({
               success : 1 , 
@@ -28,7 +30,6 @@ module.exports = {
         }
         );
     },
-
     getUsers: (req, res) => {
       getUsers((err, results) => {
         if (err) {
@@ -41,7 +42,6 @@ module.exports = {
         });
       });
     },  
-
     getUserByEmail : (req, res) => {
       const Email = req.params.Email;
       getUserByEmail(Email, (err, results) => {
@@ -52,7 +52,7 @@ module.exports = {
         if (!results) {
           return res.json({
             success: 0,
-            message: "Record not Found"
+            message: "Record not Found!"
           });
         }
         results.password = undefined;
@@ -61,8 +61,7 @@ module.exports = {
           data: results
         });
       });
-    },
-    
+    },    
     login: (req, res) => {
       const body = req.body;
       exports.PUBLIC_currentLoggedInUserEmail = body.Email ;
@@ -73,24 +72,24 @@ module.exports = {
         if (!results) {
           return res.json({
             success: 0,
-            data: "Invalid email or password !"
+            data: "Invalid email or password!"
           });
         }           
-        const passwordNotMatch = compareSync(body.Password,results.Password);
-        if (!passwordNotMatch) {
+        const passwordMatch = compareSync(body.Password,results.Password);
+        if (!passwordMatch) {
           results.Password = undefined;
           jsontoken = sign({ result : results },"qwe1234",{expiresIn: "10m"});
           activeSessions[exports.PUBLIC_currentLoggedInUserEmail] = true;
           return res.json(
           {
             success: 1,
-            message: "login done successfully !",
+            message: "login done successfully!",
             token: jsontoken 
           });          
         }else {
           return res.json({
             success: 0,
-            data: "Invalid email or password !!"
+            data: "Invalid email or password!"
           });
         }
       });
@@ -98,40 +97,18 @@ module.exports = {
     logout : (req, res) => {
       if (activeSessions[exports.PUBLIC_currentLoggedInUserEmail]) {
         activeSessions[exports.PUBLIC_currentLoggedInUserEmail] = false;
-        console.log("from logout1:" + exports.PUBLIC_currentLoggedInUserEmail);
         return res.json({
           success: 1,
           message: "Logout successful"
         });
       } 
       else {
-        console.log("from logout2:" + exports.PUBLIC_currentLoggedInUserEmail);
         return res.json({
           success: 0,
-          data: "User not currently logged in"
+          data: "Currently there is no user logged in."
         });
       }
     },
-   /* getUsersBySimilarInterests : (req, res) => {
-      const Interests = req.params.MostIntersets;
-      getUsersBySimilarInterests(Interests , (err, results) => {
-        if (err) {
-          console.log(err);
-          return;
-        }
-        if (!results) {
-          return res.json({
-            success: 0,
-            message: "There are no users with similar interests !"
-          });
-        }
-        results.password = undefined;
-        return res.json({
-          success: 1,
-          data: results
-        });
-      });
-    },*/    
     getUsersBySimilarLocation : (req, res) => {
       if(activeSessions[exports.PUBLIC_currentLoggedInUserEmail]){
       const Location = req.params.Location ;
@@ -155,10 +132,11 @@ module.exports = {
       } else{
           return res.json({
             success: 1,
-            message: "you are logged out !"
+            message:  "You are logged out! Please login."
           });
         }
-    } , 
+    } ,
+     
     getUsersByUserName : (req, res) => {
       if(activeSessions[exports.PUBLIC_currentLoggedInUserEmail]){
 
@@ -183,12 +161,10 @@ module.exports = {
     }else{
       return res.json({
         success: 1,
-        message: "you are logged out !"
+        message: "You are logged out! Please login."
       });
- 
     }
     },
-
     deleteCurrentUser : (req, res) => {
       if(activeSessions[exports.PUBLIC_currentLoggedInUserEmail]){
         deleteCurrentUser((err, results) =>{
@@ -210,13 +186,13 @@ module.exports = {
       }else{
         return res.json({
           success: 1,
-          message: "you are logged out !"
+          message: "You are logged out! Please login."
         });
    
       }
     },
 
-    updateCurrentUser : (req, res) => {
+    updateCurrentUser : (req, res ) => {
       const body = req.body ;
       const salt = genSaltSync(10);
       body.Password =hashSync(body.Password,salt);  
@@ -240,12 +216,49 @@ module.exports = {
       }else{
         return res.json({
           success: 1,
-          message: "you are logged out !"
+          message:  "You are logged out! Please login."
         }); 
       }
+    },
+    addSample : (req,res)=>{
+      const body = req.body ;      
+      addSample(body,(err,results)=>{
+      if(err){
+        if (err.code === 'ER_DUP_ENTRY') {
+          return res.status(409).json({
+              success: 0,
+              message: "Duplicate SampleId ! "
+          });
+        } 
+        else if (err=="notify"){
+          return res.status(200).json({
+              success : 1 , 
+              data : results , 
+              message : "added succesfully ! ",
+              Notification : "The threshold exceeded !"
+          });
+        }
+        else if (err=="not found!"){
+          return res.status(500).json({
+              success : 0 ,
+              message : "The threshold not found due to userID and dataID !",
+          });
+        }
+        else {
+          return res.status(500).json({
+            success : 0 ,
+            message : "database connection error!",
+        });
+        }
+      }
+        else {
+          return res.status(200).json({
+            success : 1 , 
+            data : results , 
+            message : "added succesfully ! "
+        });
+         }
+      }
+      );
     }
-}
-
-
-
-
+};

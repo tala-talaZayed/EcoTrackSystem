@@ -1,7 +1,7 @@
 const pool = require ("../../DB/database");
 const currentEmail = require('./user.controller');
 module.exports = {
-  create :(data,callBlack)=> {    
+  create :(data,callBack)=> {    
     pool.query( 
         `insert into user(UserId,UserName,Email,Password,mobile,Location,Socre)
         values (?,?,?,?,?,?,?)` , 
@@ -14,16 +14,14 @@ module.exports = {
             data.Location,
             data.Socre
         ],
-
         (error , results , fields)=>{
             if (error){
-              return  callBlack(error)
+              return  callBack(error)
             }
-              return callBlack(null, results)
+              return callBack(null, results)
         }
     );
   } ,
-
   getUserByEmail : (Email, callBack) => {
     pool.query(
         `select UserId,UserName,Email,Password,mobile,Location,Socre from user where Email=?`,
@@ -36,7 +34,6 @@ module.exports = {
         }
     );
   },
-
   deleteCurrentUser : ( callBack) => {
     const Email = currentEmail.PUBLIC_currentLoggedInUserEmail ;
     pool.query(
@@ -46,8 +43,6 @@ module.exports = {
         if (error) {
           return callBack(error);
         }
-        //test        
-        console.log (results[0].UserId);
         if (results){
           pool.query(
             `delete from user where UserId = ?`,
@@ -66,7 +61,6 @@ module.exports = {
     }
     );
   },
-
   updateCurrentUser : (data, callBack) => {
     const Email = currentEmail.PUBLIC_currentLoggedInUserEmail;
     pool.query(
@@ -102,19 +96,6 @@ module.exports = {
     }
     ); 
   } , 
- /* getUsersBySimilarInterests : (MostIntersets, callBack) => {
-    pool.query(
-        `select UserName,Email,mobile,Location,Socre from user where 
-        MostIntersets like ?`,
-        [`%${ MostIntersets }%`] ,
-        (error, results, fields) => {
-            if (error) {
-             return callBack(error);
-            }
-            return callBack(null, results);
-        }
-    );
-  },*/
   getUsersBySimilarLocation : (Location, callBack) => {
     pool.query(
         `select UserName,Email,mobile,Location,Socre from user where 
@@ -126,9 +107,8 @@ module.exports = {
             }
             return callBack(null, results);
         }
-    );
+    )
   },
-  
   getUsersByUserName : (UserName, callBack) => {
     pool.query(
         `select Email,mobile,Location from user where 
@@ -141,8 +121,48 @@ module.exports = {
             return callBack(null, results);
         }
     );
-  }, 
-};
+  },
+
+  addSample: (data,callBack)=>{
+    pool.query(
+      'select Threshold FROM user_data WHERE UserId = ? AND DataId = ?',
+      [data.UserId, data.DataId],
+      (error, results, fields) => {
+        if (error) {
+          return  callBack(error)
+        }
+        var addError = null;
+        if (results.length > 0) {
+          const threshold = results[0].Threshold;
+          if (data.Value > threshold) {
+            console.log('Notify: Value exceeds the threshold!');
+            addError = "notify";
+          }
+          pool.query(
+            'INSERT INTO sample (SampleId ,UserId, DataId, Value, Soruce) VALUES (?, ?, ?, ?, ?)',
+            [ data.SampleId ,
+              data.UserId,
+              data.DataId, 
+              data.Value, 
+              data.Soruce
+            ],
+            (error, results, fields) => {
+              if (error) {
+                return  callBack(error);
+              }
+              return  callBack(addError,results);
+            }
+          );
+        }
+        else {       
+          return  callBack("not found!",results);
+        }
+      }
+    );
+  }
+  
+  };
+
 
 
 
