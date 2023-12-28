@@ -1,6 +1,6 @@
 const pool = require ("../../DB/database");
 const currentEmail = require('./user.controller');
-module.exports = {
+module.exports ={
   create :(data,callBlack)=> {    
     pool.query( 
         `insert into user(UserId,UserName,Email,Password,mobile,Location,Socre)

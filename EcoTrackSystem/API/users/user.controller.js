@@ -335,7 +335,7 @@ module.exports = {
             Notification : "The threshold exceeded !"
         });
       }
-      else if (err=="not found!"){
+      else if(err=="not found!"){
         return res.status(500).json({
             success : 0 ,
             message : "The threshold not found due to userID and dataID !",

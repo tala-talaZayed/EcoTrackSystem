@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {createUser,deleteCurrentUser,updateCurrentUser,login,logout,
-    getUsersBySimilarLocation,getUsersByUserName,addSample,getUserWeather} = require("./user.controller");
+getUsersBySimilarLocation,getUsersByUserName,addSample,getUserWeather} = require("./user.controller");
 const {checkToken}= require("../../Authoriaztion/tokenValidation");
 router.post("/",createUser);
 router.post("/login",login);
