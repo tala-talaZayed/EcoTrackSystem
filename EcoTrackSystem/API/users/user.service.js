@@ -6,7 +6,7 @@ module.exports = {
         `insert into user(UserId,UserName,Email,Password,mobile,Location,Socre)
         values (?,?,?,?,?,?,?)` , 
         [
-            data.UserId ,
+        data.UserId ,
             data.UserName,
             data.Email ,
             data.Password ,
