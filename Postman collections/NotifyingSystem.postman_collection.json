@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "e2e469ce-68ea-42d5-90be-d312f0c810ad",
+		"name": "NotifyingSystem",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/30960113-e2e469ce-68ea-42d5-90be-d312f0c810ad?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "message",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"SampleId\":3,\r\n\"DataId\":1000 ,\r\n\"UserId\":1,\r\n\"Value\"\t: 3 , \r\n\"Soruce\":\"Sensor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/samples"
+			},
+			"response": []
+		}
+	]
+}

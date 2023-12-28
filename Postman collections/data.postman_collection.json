@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "5aa81cef-bf12-47d1-a57b-0e10d00769be",
+		"name": "data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/23519924-5aa81cef-bf12-47d1-a57b-0e10d00769be?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "PrintAllData",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNzAzNDM5NDE0LCJleHAiOjE3MDM0NDAwMTR9.znAo-BALxAzPOoErlunZ-kdzs5wMyy1dnhREZRruHXk"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://localhost:3000/EcoSystem/data/"
+			},
+			"response": []
+		},
+		{
+			"name": "updateDataByitsName",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DataName\":\"iiii\",\r\n    \"DataGroup\": \"lool\",\r\n    \"SensorId\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/data/Name/iuytr"
+			},
+			"response": []
+		},
+		{
+			"name": "updateDataByitsId",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DataName\":\"kkkk\",\r\n    \"DataGroup\": \"nooo\",\r\n    \"SensorId\" : 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/data/1012"
+			},
+			"response": []
+		},
+		{
+			"name": "addNewData",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"DataGroup\":\"Wind Information\",\r\n    \"DataName\":\"wind direction\",\r\n    \"SensorId\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/data/"
+			},
+			"response": []
+		},
+		{
+			"name": "getDataByGroupName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/Group/Temperature"
+			},
+			"response": []
+		},
+		{
+			"name": "getDataByDataName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNzAzNzgxNDQyLCJleHAiOjE3MDM3ODIwNDJ9.nhXeK914K8cxyMV1SupGc4w8UHKVH8Cii94Skq7812A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/Name/kkkk"
+			},
+			"response": []
+		},
+		{
+			"name": "getDataByDataId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/1009"
+			},
+			"response": []
+		},
+		{
+			"name": "getDataBySensorId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/Sensor/2"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDataById",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/1012"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDataByName",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/Name/iuytr"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteDataByGroupName",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/data/Group/iuytr"
+			},
+			"response": []
+		}
+	]
+}

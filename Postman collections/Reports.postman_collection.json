@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "292ccf2f-2e3f-42f5-b8bc-2831527b242c",
+		"name": "Reports",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/23519924-292ccf2f-2e3f-42f5-b8bc-2831527b242c?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "deleteReportByName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjcyOTIsImV4cCI6MTcwMzM2Nzg5Mn0.QLHEVnly4dHewMgNgSCwTScL7aPKl45AUa_yy_jShYc"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/report/pollution"
+			},
+			"response": []
+		},
+		{
+			"name": "getAllReports",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNzAzNDM1MDg1LCJleHAiOjE3MDM0MzU2ODV9.doQE4v2Un6y0MCiaeRmi6An_YuZtHIolvkW3YNxnlMU"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/report/"
+			},
+			"response": []
+		},
+		{
+			"name": "addNewReport",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjY5MjgsImV4cCI6MTcwMzM2NzUyOH0.B0k9NArLHz4ivdpa8nGROlHPKDG0nv2UrcHbXnfATtU"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Title\":\"pollution1\",\r\n    \"Description\":\"A larg amount of waste\",\r\n    \"Location\": \"kiuodm\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/report/"
+			},
+			"response": []
+		},
+		{
+			"name": "updateReportByName",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjY5MjgsImV4cCI6MTcwMzM2NzUyOH0.B0k9NArLHz4ivdpa8nGROlHPKDG0nv2UrcHbXnfATtU"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Title\":\"pollution\",\r\n    \"Description\":\"A larg amount of waste\",\r\n    \"Location\": \"kiuodm\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/report/pollution1"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "bd042ee6-f23d-4f84-84e6-44e5b7feae04",
+		"name": "Intrests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/23519924-bd042ee6-f23d-4f84-84e6-44e5b7feae04?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "deleteDataInterest",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjk3MDMsImV4cCI6MTcwMzM3MDMwM30.Gmz0mpvYeEEykTsrWHkRodnRGGdgLPNOIZ5RxNIY14Y"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/User/Intrests/1000"
+			},
+			"response": []
+		},
+		{
+			"name": "addNewDataInterestCurrentUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjkyNDYsImV4cCI6MTcwMzM2OTg0Nn0.KZgGGNeKi3wU7w076Ww9rY-z44wkggp6rH5P0wGqySA"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataId\":1000,\r\n    \"threshold\":50\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/User/Intrests/"
+			},
+			"response": []
+		},
+		{
+			"name": "printTheCurrentUserIntrest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjk3MDMsImV4cCI6MTcwMzM3MDMwM30.Gmz0mpvYeEEykTsrWHkRodnRGGdgLPNOIZ5RxNIY14Y"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://localhost:3000/EcoSystem/User/Intrests/"
+			},
+			"response": []
+		},
+		{
+			"name": "getSpecificDataThreshold",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjkyNDYsImV4cCI6MTcwMzM2OTg0Nn0.KZgGGNeKi3wU7w076Ww9rY-z44wkggp6rH5P0wGqySA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "http://localhost:3000/EcoSystem/User/Intrests/Threshold/1000"
+			},
+			"response": []
+		},
+		{
+			"name": "updateDataThresholdByitsId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjB9LCJpYXQiOjE3MDMzNjkyNDYsImV4cCI6MTcwMzM2OTg0Nn0.KZgGGNeKi3wU7w076Ww9rY-z44wkggp6rH5P0wGqySA"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dataId\":1000,\r\n    \"Threshold\": 60\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/User/Intrests/"
+			},
+			"response": []
+		}
+	]
+}

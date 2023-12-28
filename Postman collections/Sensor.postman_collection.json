@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "20d0f897-82b7-4e88-9d62-737b106df989",
+		"name": "Sensor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/23519924-20d0f897-82b7-4e88-9d62-737b106df989?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "getAllSensors",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNzAzNDQ0NTA2LCJleHAiOjE3MDM0NDUxMDZ9.O_u0iNnOnnz6oVrd4lgeGOpG6sd3nboGfKK6uH4WnCM"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/sensor/"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSensorById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNzAzNDQ5OTcxLCJleHAiOjE3MDM0NTA1NzF9.3EeUIpLmciT88v8w-cp57Ti3r-9lhgEJkkTo7_phGqI"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/EcoSystem/sensor/12"
+			},
+			"response": []
+		},
+		{
+			"name": "addNewSensor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOjF9LCJpYXQiOjE3MDM0NDk3MDgsImV4cCI6MTcwMzQ1MDMwOH0.2B1GRDeVmbw65oWFIpOnkA7jHlAOIzUY42S9_gHYM2E"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"SensorName\":\"NewSensor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/sensor/"
+			},
+			"response": []
+		},
+		{
+			"name": "updateSensortById",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMCwiVXNlck5hbWUiOiJNYXlzc2FaYXkiLCJFbWFpbCI6Ik1heXNhMTIzNDU2QG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjAsImlzQWRtaW4iOjF9LCJpYXQiOjE3MDM0NDk5MDYsImV4cCI6MTcwMzQ1MDUwNn0.Y1I2y1oTAforcy1NQ8TBw7geXhmZelshe4j5HiocNFw"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"SensorName\":\"NewSensor1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/EcoSystem/sensor/12"
+			},
+			"response": []
+		}
+	]
+}

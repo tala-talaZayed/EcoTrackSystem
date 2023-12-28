@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "21f0b757-e8e4-41a8-a835-02463869dc45",
+		"name": "USER COLLECTION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/30960113-21f0b757-e8e4-41a8-a835-02463869dc45?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"UserId\":10,\r\n            \"UserName\": \"MayssaZay\",\r\n            \"Email\": \"c\",\r\n            \"Password\": \"123456\",\r\n            \"mobile\": \"0593277823\",\r\n            \"MostIntersets\" : \"water quality\",\r\n            \"Location\":\"Nablus\",\r\n            \"Socre\": 0         \r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"Email\": \"tala20@mail.com\",\r\n            \"Password\": \"549858\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"Email\": \"Maysa123456@mail.com\",\r\n            \"Password\": \"123456\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/login"
+			},
+			"response": []
+		},
+		{
+			"name": "get users by similar location",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/Location/lebanon"
+			},
+			"response": []
+		},
+		{
+			"name": "get users by username",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/Mayssa"
+			},
+			"response": []
+		},
+		{
+			"name": "delete my account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjo1MDAsIlVzZXJOYW1lIjoidGFsYSIsIkVtYWlsIjoidGFsbGFhQG1haWwuY29tIiwibW9iaWxlIjoiMDU5MzI3NzgyMyIsIkxvY2F0aW9uIjoiTmFibHVzIiwiU29jcmUiOjF9LCJpYXQiOjE3MDE1MzYyMzcsImV4cCI6MTcwMTUzNjgzN30.5RZ0y30NaijXAb-4Rez0fp7pdhNs41oWYlQgiij2NGU"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/"
+			},
+			"response": []
+		},
+		{
+			"name": "update my profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiVXNlcklkIjoxMSwiVXNlck5hbWUiOiJheWxhIiwiRW1haWwiOiJheWxhc2FhZGVoQG1haWwuY29tIiwibW9iaWxlIjoiMDU5Mjk1MjkzIiwiTG9jYXRpb24iOiJuYWJsdXMiLCJTb2NyZSI6MX0sImlhdCI6MTcwMzM1MDk4NCwiZXhwIjoxNzAzMzUxNTg0fQ.IYllRJ0K59e2ErPKOwiT3OdFAUQ_M6MQSNwzMgBEN2g"
+					}
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "        {\r\n            \"UserName\": \"tala\",\r\n            \"Email\": \"tala1@mail.com\",\r\n            \"Password\": \"new\",\r\n            \"mobile\": \"new\" ,\r\n            \"Location\":\" j \",\r\n            \"Socre\":\"0\"\r\n        }\r\n        ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/API/users/"
+			},
+			"response": []
+		}
+	]
+}
