@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "74ebcb32-956d-4f69-b485-f3f94a918f82",
+		"name": "sample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23519924",
+		"_collection_link": "https://bold-shuttle-299499.postman.co/workspace/Team-Workspace~2fc0e015-90b4-438b-8808-dd49f1a86c69/collection/29488922-74ebcb32-956d-4f69-b485-f3f94a918f82?action=share&source=collection_link&creator=23519924"
+	},
+	"item": [
+		{
+			"name": "Add Sample",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:3000/API/samples"
+			},
+			"response": []
+		},
+		{
+			"name": "delete Sample",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/samples/:sampleId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"samples",
+						":sampleId"
+					],
+					"variable": [
+						{
+							"key": "sampleId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete sample",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/API/samples/70001\n"
+			},
+			"response": []
+		},
+		{
+			"name": "delete sample",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:3000/API/samples/99999"
+			},
+			"response": []
+		},
+		{
+			"name": ". Get Samples by Data ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/samples/data/:dataId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"samples",
+						"data",
+						":dataId"
+					],
+					"variable": [
+						{
+							"key": "dataId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve Samples for Existing Data ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/API/samples/data/1001"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Samples by User ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/samples/user/:userId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"samples",
+						"user",
+						":userId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Samples by Source",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/API/samples/source/:source",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"API",
+						"samples",
+						"source",
+						":source"
+					],
+					"variable": [
+						{
+							"key": "source",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
