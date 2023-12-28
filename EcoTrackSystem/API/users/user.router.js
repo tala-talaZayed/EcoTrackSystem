@@ -14,5 +14,3 @@ router.get("/Location/:Location",checkToken,getUsersBySimilarLocation);
 router.get("/weather/:city",checkToken, getUserWeather);
 
 module.exports = router ;
-
-a
